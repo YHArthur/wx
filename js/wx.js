@@ -2,10 +2,10 @@
 function wx_config(apilist) {
   
   // 默认需要开通的微信权限
-  apilist = apilist || ['onMenuShareTimeline','getLocation','chooseWXPay','scanQRCode']; 
+  apilist = apilist || ['onMenuShareAppMessage','onMenuShareTimeline',"onMenuShareQQ","onMenuShareWeibo","getLocation","chooseWXPay","scanQRCode"]; 
 
   $.ajax({
-      url: 'http://www.fnying.com/wx/php/get_ticket.php',
+      url: 'http://wx.fnying.com/js_sign.php',
       dataType: "jsonp",
       data: {url:window.location.href},
       success: function (response) {
@@ -18,11 +18,12 @@ function wx_config(apilist) {
               jsApiList: apilist              // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
           });
           wx.error(function (res) {
-            alert(res.errMsg);
+            AlertDialog(res.errMsg);
           });
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
-          alert(errorThrown);
+          AlertDialog(errorThrown);
       }
   });
 }
+

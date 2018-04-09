@@ -1,0 +1,16 @@
+.page{
+	margin: 20px;
+}
+.pic{
+	width: 80%;
+	margin:0 10% 10px;
+}
+.ewm{
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+.gzh{
+	text-align: center;
+}
