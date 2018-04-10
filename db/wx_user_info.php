@@ -1,5 +1,21 @@
 <?php
 //======================================
+// 函数: 取得微信用户信息
+// 参数: $wxid          微信ID
+// 参数: $unionid       微信统一标识
+// 返回: 微信用户信息数组
+// 说明:
+//======================================
+function get_wx_user_info($wxid, $unionid)
+{
+  $db = new DB_WX();
+  $sql = "SELECT * FROM wx_user_info WHERE wxid = {$wxid} AND unionid = '{$unionid}'";
+  $db->query($sql);
+  $row = $db->fetchRow();
+  return $row;
+}
+
+//======================================
 // 函数: 判定微信用户是否存在
 // 参数: $openid        微信OPENID
 // 返回: true           存在

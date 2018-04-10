@@ -6,7 +6,7 @@
 // 返回: 用户信息数组
 // 返回: 异常返回空数组
 //======================================
-function get_wx_user_info($appid, $code)
+function get_user_info($appid, $code)
 {
   $db = new DB_WX();
   $data = array();

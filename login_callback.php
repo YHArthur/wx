@@ -27,7 +27,7 @@ $code = $_GET['code'];
 $appid = $_SESSION["appid"];
 
 // 获取微信用户信息
-$user = get_wx_user_info($appid, $code);
+$user = get_user_info($appid, $code);
 // 微信用户信息取得失败
 if (!isset($user['openid']))
   exit('get wx user info failed');
