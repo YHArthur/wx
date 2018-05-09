@@ -28,6 +28,34 @@ function get_user_info($appid, $code)
 }
 
 //======================================
+// 函数: 获取微信临时素材
+// 参数: $appid        APPID
+// 参数: $media_id     微信临时素材ID
+// 返回: 微信临时素材
+// 返回: 异常返回空数组
+//======================================
+function get_tmp_media($appid, $media_id)
+{
+  $db = new DB_WX();
+  $data = array();
+  
+  // 取得APPID对应的微信ID和凭证密钥
+  $sql = "SELECT wxid, secret FROM wx_app_info WHERE appid = '{$appid}'";
+  $db->query($sql);
+  $row = $db->fetchRow();
+  if (!($row))
+    return $data;
+  // 凭证密钥
+  $secret = $row['secret'];
+  // 取得AccessToken
+  $token = get_access_token($appid);
+  // 通过微信API获得微信临时素材
+  $api = new wxApi($appid, $secret);
+  $data = $api->getWxTmpMedia($token, $media_id);
+  return $data;
+}
+
+//======================================
 // 函数: 获取微信基础AccessToken
 // 参数: $appid         APPID
 // 返回: 微信基础AccessToken

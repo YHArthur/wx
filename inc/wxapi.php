@@ -24,6 +24,12 @@ class wxApi {
     return $user;
   }
 
+  // 获得微信临时素材
+  public function getWxTmpMedia($accessToken, $media_id) {
+    $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token={$accessToken}&media_id={$media_id}";
+    return $this->httpGet($url);
+  }
+  
   // 获得微信JsApiTicket
   public function getJsApiTicket($accessToken) {
     $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token={$accessToken}";
