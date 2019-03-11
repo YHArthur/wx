@@ -16,7 +16,7 @@ Session_start();
 
 // state参数检查
 if ($_GET['state'] != $_SESSION["state"])
-  exit('wrong parameter');
+  exit('security verification has failed, pls close this page and login again');
 
 // SESSION参数检查
 if (!isset($_SESSION["appid"]))
