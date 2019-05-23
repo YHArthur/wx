@@ -28,9 +28,37 @@ function get_user_info($appid, $code)
 }
 
 //======================================
+// 函数: 获取长链接转短链接
+// 参数: $appid         APPID
+// 参数: $url           需转换的长链接
+// 返回: 转换后的短链接
+// 返回: 异常返回空数组
+//======================================
+function get_short_url($appid, $url)
+{
+  $db = new DB_WX();
+  $data = array();
+  
+  // 取得APPID对应的微信ID和凭证密钥
+  $sql = "SELECT wxid, secret FROM wx_app_info WHERE appid = '{$appid}'";
+  $db->query($sql);
+  $row = $db->fetchRow();
+  if (!($row))
+    return $data;
+  // 凭证密钥
+  $secret = $row['secret'];
+  // 取得AccessToken
+  $token = get_access_token($appid);
+  // 通过微信API获得微信临时素材
+  $api = new wxApi($appid, $secret);
+  $data = $api->getShortUrl($token, $url);
+  return $data;
+}
+
+//======================================
 // 函数: 获取微信临时素材
-// 参数: $appid        APPID
-// 参数: $media_id     微信临时素材ID
+// 参数: $appid         APPID
+// 参数: $media_id      微信临时素材ID
 // 返回: 微信临时素材
 // 返回: 异常返回空数组
 //======================================
